@@ -1,0 +1,20 @@
+{
+	"manifest_version": 2,
+	"background": {
+		"scripts": ["script.js"],
+		"persistent": false
+	},
+	"icons": { "16": "koala32.png",
+           "48": "koala48.png",
+          "128": "koala128.png" },
+	"browser_action": {
+		"default_icon": "koala48.png",
+		"default_title": "TheLockNLol Checker",
+		"default_popup": "popup.html",
+		"name": "TheLockNLol Checker"
+	},
+	"description": "Shows a notification when TheLockNLol uploads a Video or livestreams",
+	"name": "TheLockNLol Checker",
+	"permissions": [ "notifications", "*://api.justin.tv/*", "alarms" ],
+	"version": "1.0.1"
+}
