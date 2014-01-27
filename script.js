@@ -6,7 +6,7 @@ if (!localStorage['lastVideo']) localStorage['lastVideo'] = "";
 
 function notify(title, description, link)
 {
-	var notification = new Notification(title, { "body": description, "icon": "koala48.png" })
+	var notification = new Notification(title, { "body": description, "icon": "koala48.png" });
 	
 	notification.onclick = function ()
 	{
