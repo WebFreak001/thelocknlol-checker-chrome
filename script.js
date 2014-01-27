@@ -3,11 +3,25 @@ if (!localStorage['video']) localStorage['video'] = "1";
 if (!localStorage['livestream']) localStorage['livestream'] = "1";
 if (!localStorage['sound']) localStorage['sound'] = "1";
 if (!localStorage['lastVideo']) localStorage['lastVideo'] = "";
+if (!localStorage['lastFb']) localStorage['lastFb'] = "";
 
 function notify(title, description, link)
 {
 	var notification = new Notification(title, { "body": description, "icon": "koala48.png" });
-	
+
+	notification.onclick = function ()
+	{
+		window.open(link);
+		notification.close();
+	}
+	notification.show();
+	window.setTimeout(function () { notification.close(); }, 10000);
+}
+
+function notifyImg(title, description, link, img)
+{
+	var notification = new Notification(title, { "body": description, "icon": img });
+
 	notification.onclick = function ()
 	{
 		window.open(link);
@@ -50,7 +64,7 @@ function checkTwitch()
 				}
 			}
 		}
-		xmlhttp.open("GET", "http://api.justin.tv/api/stream/list.json?channel=TheLockNLol", false);
+		xmlhttp.open("GET", "http://api.justin.tv/api/stream/list.json?channel=WebFreak001", false);
 		xmlhttp.send();
 	}
 }
@@ -80,10 +94,46 @@ function checkYoutube()
 			var title = entries[i].getElementsByTagName("title")[0].childNodes[0].nodeValue;
 			if (id == localStorage['lastVideo']) break;
 			notify("TheLockNLol hat ein neues Video hochgeladen!", title, "http://www.youtube.com/watch?v=" + id.substring(42));
-			if(lastID == "") lastID = id;
+			if (lastID == "") lastID = id;
 		}
-		if(lastID != "") localStorage['lastVideo'] = lastID;
+		if (lastID != "") localStorage['lastVideo'] = lastID;
 	}
+}
+
+function checkFacebook()
+{
+	if (window.XMLHttpRequest)
+	{
+		xhttp = new XMLHttpRequest();
+	}
+	else // code for IE5 and IE6
+	{
+		xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=ISO-8859-1;');
+	xhttp.open("GET", "https://graph.facebook.com/TheLockNLol/feed?limit=5&access_token=678452665531590|x3qFGSCtknwuL6CRSk8zAztx69Y", false);
+	xhttp.send();
+	var json = JSON.parse(xhttp.responeText);
+	var objects = json.data;
+	var lastID = "";
+	for(var i = 0; i < objects.length; i++)
+	{
+		var id = objects[i].id;
+		var title = objects[i].message;
+		var desc = objects[i].description;
+		var link = objects[i].link;
+		var img = objects[i].picture;
+		if(!link)
+		{
+			notifyImg(title, desc, "www.facebook.com/TheLockNLol", img);
+		} else 
+		{
+			notifyImg(title, desc, link, img);
+		}
+		if (id == localStorage["lastFb"]) break;
+		if (lastID == "") lastID = id;
+	}
+	if (lastID != "") localStorage["lastFb"] = lastID;
 }
 
 function process()
