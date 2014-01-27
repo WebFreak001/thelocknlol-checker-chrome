@@ -16,5 +16,5 @@
 	"description": "Shows a notification when TheLockNLol uploads a Video or livestreams",
 	"name": "TheLockNLol Checker",
 	"permissions": [ "notifications", "*://api.justin.tv/*", "alarms" ],
-	"version": "1.0.1"
+	"version": "1.1.0"
 }
