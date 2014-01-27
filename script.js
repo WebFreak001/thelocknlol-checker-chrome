@@ -126,6 +126,7 @@ function checkFacebook()
 			var desc = objects[i].description;
 			var link = objects[i].link;
 			var img = objects[i].picture;
+			if (id == localStorage["lastFb"]) break;
 			if (!link)
 			{
 				notifyImg(title, desc, "www.facebook.com/TheLockNLol", img);
@@ -133,7 +134,6 @@ function checkFacebook()
 			{
 				notifyImg(title, desc, link, img);
 			}
-			if (id == localStorage["lastFb"]) break;
 			if (lastID == "") lastID = id;
 		}
 		if (lastID != "") localStorage["lastFb"] = lastID;
