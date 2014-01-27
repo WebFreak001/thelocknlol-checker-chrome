@@ -113,8 +113,8 @@ function checkFacebook()
 		{
 			xhttp = new ActiveXObject("Microsoft.XMLHTTP");
 		}
-		xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=ISO-8859-1;');
 		xhttp.open("GET", "https://graph.facebook.com/TheLockNLol/feed?limit=5&access_token=678452665531590|x3qFGSCtknwuL6CRSk8zAztx69Y", false);
+		xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=ISO-8859-1;');
 		xhttp.send();
 		var json = JSON.parse(xhttp.responeText);
 		var objects = json.data;
