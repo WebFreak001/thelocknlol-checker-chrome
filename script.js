@@ -114,9 +114,9 @@ function checkFacebook()
 			xhttp = new ActiveXObject("Microsoft.XMLHTTP");
 		}
 		xhttp.open("GET", "https://graph.facebook.com/TheLockNLol/feed?limit=5&access_token=678452665531590|x3qFGSCtknwuL6CRSk8zAztx69Y", false);
-		xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=ISO-8859-1;');
+		xhttp.setRequestHeader("Content-type", "application/x-www-from-urlencoded; charset=ISO-8859-1;");
 		xhttp.send();
-		var json = JSON.parse(xhttp.responeText);
+		var json = JSON.parse(xhttp.responseText);
 		var objects = json.data;
 		var lastID = "";
 		for (var i = 0; i < objects.length; i++)
