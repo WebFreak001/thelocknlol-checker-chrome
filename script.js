@@ -6,11 +6,8 @@ if (!localStorage['lastVideo']) localStorage['lastVideo'] = "";
 
 function notify(title, description, link)
 {
-	var notification = window.webkitNotifications.createNotification(
-		'koala256.png',
-		title,
-		description
-	);
+	var notification = new Notification(title, { "body": description, "icon": "koala48.png" })
+	
 	notification.onclick = function ()
 	{
 		window.open(link);
